@@ -1,11 +1,20 @@
 {
-  "extends": "./tsconfig.build.json",
-
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@ttt/lib/*": ["src/lib/src/*"],
       "@ttt/*": ["src/*/src"],
-    }
+    },
+    "module": "commonjs",
+    "target": "es6",
+    "sourceMap": true,
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "types": [],
+    "jsx": "react",
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
   }
 }

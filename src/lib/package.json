@@ -1,17 +1,6 @@
 {
-  "name": "@ttt/other",
+  "name": "@ttt/lib",
   "private": true,
-  "main": "dist/index",
-  "types": "dist/index",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "watch": "tsc -p tsconfig.build.json --w",
-    "start": "yarn watch",
-    "test": "echo \"No tests yet...\""
-  },
   "devDependencies": {
     "typescript": "^4.3.5"
   }
