@@ -1,5 +1,6 @@
 export enum GameState {
   Created = 1,
-  InProgress = 2,
-  Finished = 3,
+  Connected = 2,
+  InProgress = 3,
+  Finished = 4,
 }

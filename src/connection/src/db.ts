@@ -17,8 +17,19 @@ export const getPlayerTwoId = async (
   shortId: string
 ) => {
   return connection.maybeOne(
-    sql<queries.GetPlayerTwoId>`select player_two_id from games where short_id = ${shortId}`
+    sql<queries.GetPlayerTwoId>`select player_two_id, fk_game_state_id from games where short_id = ${shortId}`
   );
+};
+
+export const updateGameState = async (
+  connection: DatabaseConnectionType,
+  id: string,
+  state: GameState
+) => {
+  return connection.query(sql<queries._void>`
+        update games
+        set fk_game_state_id = ${state}
+        where short_id = ${id}`);
 };
 
 export declare namespace queries {
@@ -30,9 +41,15 @@ export declare namespace queries {
     player_one_id: string;
   }
 
-  /** - query: `select player_two_id from games where short_id = $1` */
+  /** - query: `select player_two_id, fk_game_state_id from games where short_id = $1` */
   export interface GetPlayerTwoId {
     /** column: `public.games.player_two_id`, not null: `true`, regtype: `uuid` */
     player_two_id: string;
+
+    /** column: `public.games.fk_game_state_id`, not null: `true`, regtype: `smallint` */
+    fk_game_state_id: number;
   }
+
+  /** - query: `update games set fk_game_state_id = $1 where short_id = $2` */
+  export type _void = {};
 }

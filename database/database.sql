@@ -81,5 +81,6 @@ INSERT INTO public.winners (winner) VALUES
 
 INSERT INTO public.game_states (state) VALUES
 ('Created'),
+('Connected'),
 ('InProgress'),
 ('Finished');

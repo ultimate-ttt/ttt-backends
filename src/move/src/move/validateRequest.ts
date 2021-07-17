@@ -10,17 +10,17 @@ const validPlayerId = (id: string) => id.length === 36;
 export const validBody = (body: RequestBody) => {
   return (
     notUndefined(body) &&
+    notUndefined(body.gameId) &&
+    validShortId(body.gameId) &&
+    notUndefined(body.playerId) &&
+    validPlayerId(body.playerId) &&
     notUndefined(body.boardX) &&
     notUndefined(body.boardY) &&
     notUndefined(body.tileX) &&
     notUndefined(body.tileY) &&
-    notUndefined(body.gameId) &&
-    notUndefined(body.playerId) &&
     validCoordinate(body.boardX) &&
     validCoordinate(body.boardY) &&
     validCoordinate(body.tileX) &&
-    validCoordinate(body.tileY) &&
-    validShortId(body.gameId) &&
-    validPlayerId(body.playerId)
+    validCoordinate(body.tileY)
   );
 };

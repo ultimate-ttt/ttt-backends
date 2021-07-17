@@ -3,7 +3,8 @@ import { createPool } from 'slonik';
 import { connectionString } from '../environment';
 import { Status } from '@ttt/lib/Status';
 import { RequestBody, validBody } from './validateRequest';
-import { getPlayerTwoId } from '../db';
+import { getPlayerTwoId, updateGameState } from '../db';
+import { GameState } from '@ttt/lib/db/GameState';
 
 interface CustomContext extends Context {
   res: {
@@ -21,7 +22,7 @@ interface CustomRequest extends HttpRequest {
 
 const pool = createPool(connectionString);
 
-const httpTrigger: AzureFunction = async function (
+const httpTrigger: AzureFunction = async function(
   context: CustomContext,
   req: CustomRequest,
 ): Promise<void> {
@@ -36,18 +37,30 @@ const httpTrigger: AzureFunction = async function (
   }
 
   const shortId = req.body.shortId;
-  const playerId = await pool.connect(con => getPlayerTwoId(con, shortId));
+  const playerInfo = await pool.connect(con => getPlayerTwoId(con, shortId));
 
-  if (playerId === null) {
+  if (playerInfo === null) {
     context.res = {
       status: Status.BadRequest,
+      body: {
+        message: 'Game does not exist',
+      },
     };
     return;
   }
 
+  if (playerInfo.fk_game_state_id > GameState.Created) {
+    context.res = {
+      status: Status.Forbidden,
+    };
+    return;
+  }
+
+  await pool.connect(con => updateGameState(con, shortId, GameState.Connected));
+
   context.res = {
     body: {
-      playerId: playerId.player_two_id,
+      playerId: playerInfo.player_two_id,
     },
   };
 };

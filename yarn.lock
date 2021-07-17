@@ -41,9 +41,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@slonik/typegen@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "@slonik/typegen@npm:0.10.0"
+"@slonik/typegen@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "@slonik/typegen@npm:0.11.0"
   dependencies:
     "@rushstack/ts-command-line": ^4.7.8
     chokidar: ^3.5.2
@@ -60,7 +60,7 @@ __metadata:
     typescript: "*"
   bin:
     slonik-typegen: cli.js
-  checksum: a5ab4feb0fdfc480bfd6780df15c6a5986b20ea1e8b500f2b8739912dbb66be8d4cee71eb9d4c7d594e74a354d48a5c0355dd348c1261d5ff114b92a52d7120f
+  checksum: c000c9d30a1908dd5222d105756aa48215dddaacd48df39af9d17bbf4603c21801021b176ab61be74b7565702ae3700ca8d6300d40070b6f6723117d5db75f6b
   languageName: node
   linkType: hard
 
@@ -78,8 +78,8 @@ __metadata:
     dotenv-webpack: ^7.0.3
     ts-loader: ^9.2.3
     tsconfig-paths-webpack-plugin: ^3.5.1
-    typescript: ^4.3.4
-    webpack: ^5.43.0
+    typescript: ^4.3.5
+    webpack: ^5.45.1
   languageName: unknown
   linkType: soft
 
@@ -88,16 +88,16 @@ __metadata:
   resolution: "@ttt/connection@workspace:src/connection"
   dependencies:
     "@azure/functions": ^1.2.3
-    "@slonik/typegen": ^0.10.0
+    "@slonik/typegen": ^0.11.0
     "@ttt/build": "workspace:*"
     "@ttt/lib": "workspace:*"
-    "@types/node": ^15.12.5
+    "@types/node": ^16.3.3
     npm-run-all: ^4.1.5
     short-unique-id: ^4.3.3
-    slonik: ^23.8.1
+    slonik: ^23.8.3
     ts-loader: ^9.2.3
-    typescript: ^4.3.4
-    webpack: ^5.43.0
+    typescript: ^4.3.5
+    webpack: ^5.45.1
     webpack-merge: ^5.8.0
   languageName: unknown
   linkType: soft
@@ -115,15 +115,15 @@ __metadata:
   resolution: "@ttt/move@workspace:src/move"
   dependencies:
     "@azure/functions": ^1.2.3
-    "@slonik/typegen": ^0.10.0
+    "@slonik/typegen": ^0.11.0
     "@ttt/build": "workspace:*"
     "@ttt/lib": "workspace:*"
-    "@types/node": ^15.12.5
+    "@types/node": ^16.3.3
     npm-run-all: ^4.1.5
-    slonik: ^23.8.1
+    slonik: ^23.8.3
     ts-loader: ^9.2.3
-    typescript: ^4.3.4
-    webpack: ^5.43.0
+    typescript: ^4.3.5
+    webpack: ^5.45.1
     webpack-merge: ^5.8.0
   languageName: unknown
   linkType: soft
@@ -155,17 +155,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/estree@npm:*":
+"@types/estree@npm:*, @types/estree@npm:^0.0.50":
   version: 0.0.50
   resolution: "@types/estree@npm:0.0.50"
   checksum: dd52d035077d4ea92ff7a1191b1b02ccd0dba76ad51d1d95e4cd81dd3cc234042b859ae9160c3059dcc5c384cd895cd860d4f18913f1033736f867543f5d4743
-  languageName: node
-  linkType: hard
-
-"@types/estree@npm:^0.0.49":
-  version: 0.0.49
-  resolution: "@types/estree@npm:0.0.49"
-  checksum: 3defc98b145582b8e14872a5308fa4717397f4a3ea6be9785e46c18fe21fa742b489aec7769424b6c4b4b5002b74d22e2ad6d43e624c735e5117eab21bd1fb4a
   languageName: node
   linkType: hard
 
@@ -183,10 +176,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^15.12.5":
-  version: 15.12.5
-  resolution: "@types/node@npm:15.12.5"
-  checksum: 42485de7a0b7277ddaae25b36ab4174fc8f23e8a5de9ccaedd002ecec17135c48227a5e09088d181c2bc34fe6b2064feb4a468954372076fd8addac2f72dad7e
+"@types/node@npm:^16.3.3":
+  version: 16.3.3
+  resolution: "@types/node@npm:16.3.3"
+  checksum: e597a54070815170d8f541c778900023f2522c27be9c56b2b8411d663da1ef5226f9d16ec158c5d9c84ddcc85551e3d02aa68046aa108b4c6085bc7c95a5bebb
   languageName: node
   linkType: hard
 
@@ -3030,7 +3023,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"schema-utils@npm:^3.0.0":
+"schema-utils@npm:^3.0.0, schema-utils@npm:^3.1.0":
   version: 3.1.0
   resolution: "schema-utils@npm:3.1.0"
   dependencies:
@@ -3157,7 +3150,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"slonik@npm:^23.8.1":
+"slonik@npm:^23.8.3":
   version: 23.8.3
   resolution: "slonik@npm:23.8.3"
   dependencies:
@@ -3632,16 +3625,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-typescript@^4.3.4:
-  version: 4.3.4
-  resolution: "typescript@npm:4.3.4"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 9791c5fe98db6cb70ec0efad8d3d2eb957b9643ee600b90bff49267de69768d0d5f59c41a8fd731cfd63df1ccfb2cb25505a2015d7b39ac10ea51f605a058e16
-  languageName: node
-  linkType: hard
-
 typescript@^4.3.5:
   version: 4.3.5
   resolution: "typescript@npm:4.3.5"
@@ -3649,16 +3632,6 @@ typescript@^4.3.5:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: d9a8e78d72dd19896e6bfa73ab2a0fcea6eca2700d1d6e7c33f67a970af54a3e0fed8f715a8c4e6a0ff7fc0995067b394b2003518ab0aa84cd396377e54b760c
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.3.4#builtin<compat/typescript>":
-  version: 4.3.4
-  resolution: "typescript@patch:typescript@npm%3A4.3.4#builtin<compat/typescript>::version=4.3.4&hash=ddfc1b"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: c8766e84a4f71e925cc059af8286cc7f41819fe821d433b90c83e9b36729cbda7a8e4be3292d8a1433cd717d529c93217d58d173418f43862290b206bd88b284
   languageName: node
   linkType: hard
 
@@ -3822,12 +3795,12 @@ typescript@^4.3.5:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.43.0":
-  version: 5.43.0
-  resolution: "webpack@npm:5.43.0"
+"webpack@npm:^5.45.1":
+  version: 5.45.1
+  resolution: "webpack@npm:5.45.1"
   dependencies:
     "@types/eslint-scope": ^3.7.0
-    "@types/estree": ^0.0.49
+    "@types/estree": ^0.0.50
     "@webassemblyjs/ast": 1.11.1
     "@webassemblyjs/wasm-edit": 1.11.1
     "@webassemblyjs/wasm-parser": 1.11.1
@@ -3844,7 +3817,7 @@ typescript@^4.3.5:
     loader-runner: ^4.2.0
     mime-types: ^2.1.27
     neo-async: ^2.6.2
-    schema-utils: ^3.0.0
+    schema-utils: ^3.1.0
     tapable: ^2.1.1
     terser-webpack-plugin: ^5.1.3
     watchpack: ^2.2.0
@@ -3854,7 +3827,7 @@ typescript@^4.3.5:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 648013393a22c1d5a3cc8e22e2dc031024e6dfe79e97ac9f591a477af1d124cf2f95b530944ba45571ed2d1846bbf340a1358a28d18edbd042bffc2fdd50949a
+  checksum: f25a1c1db231d5a0773af2d8fa312e8915c9592ddae708c058be9abaa483d21051955fab69859671bd104ac49d3c21b74086cd258b4057477b5d017cd697cf87
   languageName: node
   linkType: hard
 

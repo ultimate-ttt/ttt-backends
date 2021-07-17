@@ -7,7 +7,12 @@ This is a mono-repository containing all backends for the Ultimate TTT frontend.
 2. Connect to the database (for example with [DBeaver](https://dbeaver.com/) or [BeeKeeper](https://beekeeperstudio.io/))
 3. Execute the script in [database/database.sql](https://github.com/ultimate-ttt/ttt-backends/blob/main/database/database.sql)
 4. Install the Azure Function Core Tools: https://github.com/Azure/azure-functions-core-tools
-5. `yarn`
+5. In each function directory run:
+   ```
+   mv src/local.settings.example.json src/local.settings.json
+   mv .env.example .env
+   ```
+6. `yarn`
 
 # Commands
 - `yarn api`, starts all functions locally and watches for changes
