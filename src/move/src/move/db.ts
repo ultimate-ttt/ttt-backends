@@ -14,6 +14,15 @@ export const getMoves = async (
   );
 };
 
+export const getGameState = async (
+  connection: DatabaseConnectionType,
+  shortId: string
+) => {
+  return connection.maybeOneFirst(
+    sql<queries.Game>`select fk_game_state_id from games where short_id = ${shortId}`
+  );
+};
+
 export const getPlayerOneId = async (
   connection: DatabaseConnectionType,
   id: string
@@ -51,8 +60,7 @@ export const updateGameState = async (
   return connection.query(sql<queries._void>`
         update games
         set fk_game_state_id = ${state}
-        where short_id = ${id}`
-  );
+        where short_id = ${id}`);
 };
 
 export declare namespace queries {
@@ -60,31 +68,37 @@ export declare namespace queries {
 
   /** - query: `select board_x, board_y, tile_x, tile_y,... [truncated] ...me_short_id = $1 order by created_on asc` */
   export interface Move {
-    /** regtype: `smallint` */
+    /** column: `public.moves.board_x`, not null: `true`, regtype: `smallint` */
     board_x: number;
 
-    /** regtype: `smallint` */
+    /** column: `public.moves.board_y`, not null: `true`, regtype: `smallint` */
     board_y: number;
 
-    /** regtype: `smallint` */
+    /** column: `public.moves.tile_x`, not null: `true`, regtype: `smallint` */
     tile_x: number;
 
-    /** regtype: `smallint` */
+    /** column: `public.moves.tile_y`, not null: `true`, regtype: `smallint` */
     tile_y: number;
 
-    /** regtype: `character varying(6)` */
+    /** column: `public.moves.fk_game_short_id`, not null: `true`, regtype: `character varying(6)` */
     fk_game_short_id: string;
+  }
+
+  /** - query: `select fk_game_state_id from games where short_id = $1` */
+  export interface Game {
+    /** column: `public.games.fk_game_state_id`, not null: `true`, regtype: `smallint` */
+    fk_game_state_id: number;
   }
 
   /** - query: `select player_one_id from games where short_id = $1` */
   export interface GetPlayerOneId {
-    /** regtype: `uuid` */
+    /** column: `public.games.player_one_id`, not null: `true`, regtype: `uuid` */
     player_one_id: string;
   }
 
   /** - query: `select player_two_id from games where short_id = $1` */
   export interface GetPlayerTwoId {
-    /** regtype: `uuid` */
+    /** column: `public.games.player_two_id`, not null: `true`, regtype: `uuid` */
     player_two_id: string;
   }
 

@@ -15,6 +15,7 @@ This is a mono-repository containing all backends for the Ultimate TTT frontend.
 6. `yarn`
 
 # Commands
+- `yarn db`, starts Supabase
 - `yarn api`, starts all functions locally and watches for changes
 - `yarn start` ran in a specific function directory, starts an individual function app and watches for changes
 

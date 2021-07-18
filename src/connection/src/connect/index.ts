@@ -20,6 +20,15 @@ interface CustomRequest extends HttpRequest {
   body?: RequestBody;
 }
 
+const badRequest = (message: string) => {
+  return {
+    status: Status.BadRequest,
+    body: {
+      message: message,
+    },
+  };
+};
+
 const pool = createPool(connectionString);
 
 const httpTrigger: AzureFunction = async function(
@@ -27,12 +36,7 @@ const httpTrigger: AzureFunction = async function(
   req: CustomRequest,
 ): Promise<void> {
   if (!validBody(req.body)) {
-    context.res = {
-      status: Status.BadRequest,
-      body: {
-        message: 'Request Body is formally invalid',
-      },
-    };
+    context.res = badRequest('Request Body is formally invalid');
     return;
   }
 
@@ -40,12 +44,7 @@ const httpTrigger: AzureFunction = async function(
   const playerInfo = await pool.connect(con => getPlayerTwoId(con, shortId));
 
   if (playerInfo === null) {
-    context.res = {
-      status: Status.BadRequest,
-      body: {
-        message: 'Game does not exist',
-      },
-    };
+    context.res = badRequest('Game does not exist');
     return;
   }
 

@@ -5,7 +5,7 @@ import { Status } from '@ttt/lib/Status';
 import { validBody } from './validateRequest';
 import { RequestBody } from './requestBody';
 import {
-  createMove,
+  createMove, getGameState,
   getMoves,
   getPlayerOneId,
   getPlayerTwoId,
@@ -39,7 +39,7 @@ const badRequest = (message: string) => {
 
 const pool = createPool(connectionString);
 
-const httpTrigger: AzureFunction = async function (
+const httpTrigger: AzureFunction = async function(
   context: CustomContext,
   req: CustomRequest,
 ): Promise<void> {
@@ -47,13 +47,19 @@ const httpTrigger: AzureFunction = async function (
     context.res = badRequest('Request Body is formally invalid');
     return;
   }
-
   const move = req.body;
+
+  const gameState = await pool.connect(con => getGameState(con, move.gameId));
+  if (gameState && gameState < GameState.Connected) {
+    context.res = badRequest('Game needs to be started');
+    return;
+  }
+
   const moves = await pool.connect((con) => getMoves(con, move.gameId));
   const tttGame = initGame(moves);
 
   const currentPlayer = tttGame.getCurrentPlayer();
-  let playerId = '';
+  let playerId;
   if (currentPlayer === Player.Cross) {
     playerId = await pool.connect((con) => getPlayerOneId(con, move.gameId));
   } else {
@@ -72,7 +78,6 @@ const httpTrigger: AzureFunction = async function (
     return;
   }
 
-  context.log('try to update game state');
   if (tttGame.getMoves().length === 0) {
     await pool.connect((con) =>
       updateGameState(con, move.gameId, GameState.InProgress),
