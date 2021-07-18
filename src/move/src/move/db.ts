@@ -1,6 +1,7 @@
 import { DatabaseConnectionType, sql } from "slonik";
 import { RequestBody } from "./requestBody";
-import { GameState } from "@ttt/lib/db/GameState";
+import { GameState } from "@ttt/lib/GameState";
+import { Player } from '@ttt/lib/TicTacToeGame';
 
 export const getMoves = async (
   connection: DatabaseConnectionType,
@@ -45,11 +46,12 @@ export const getPlayerTwoId = async (
 
 export const createMove = async (
   connection: DatabaseConnectionType,
-  move: RequestBody
+  move: RequestBody,
+  player: Player
 ) => {
   return connection.query(sql<queries._void>`
-    insert into moves (board_x, board_y, tile_x, tile_y, fk_game_short_id)
-    values (${move.boardX}, ${move.boardY}, ${move.tileX}, ${move.tileY}, ${move.gameId})`);
+    insert into moves (board_x, board_y, tile_x, tile_y, fk_game_short_id, fk_player)
+    values (${move.boardX}, ${move.boardY}, ${move.tileX}, ${move.tileY}, ${move.gameId}, ${player})`);
 };
 
 export const updateGameState = async (

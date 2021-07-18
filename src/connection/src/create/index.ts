@@ -1,9 +1,9 @@
 import { AzureFunction, Context } from '@azure/functions';
-import { createPool, sql } from 'slonik';
-import { GameState } from '@ttt/lib/db/GameState';
+import { createPool } from 'slonik';
+import { GameState } from '@ttt/lib/GameState';
 import ShortUniqueId from 'short-unique-id';
-import { connectionString } from '../environment';
 import { createGame } from '../db';
+import environment from '../environment';
 
 interface CustomContext extends Context {
   res: {
@@ -15,7 +15,7 @@ interface CustomContext extends Context {
   };
 }
 
-const pool = createPool(connectionString);
+const pool = createPool(environment.connectionString);
 
 const httpTrigger: AzureFunction = async function (
   context: CustomContext,

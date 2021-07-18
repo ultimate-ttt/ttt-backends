@@ -1,3 +1,6 @@
 const connectionString = process.env.DatabaseConnectionString;
+const environment = {
+  connectionString
+}
 
-export { connectionString };
+export default environment;

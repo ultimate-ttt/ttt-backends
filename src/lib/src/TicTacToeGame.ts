@@ -20,7 +20,7 @@ enum TileValue {
   Destroyed = 3,
 }
 
-enum Winner {
+export enum Winner {
   Cross = 0,
   Circle = 1,
   None = 2,

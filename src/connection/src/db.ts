@@ -1,4 +1,4 @@
-import { GameState } from "@ttt/lib/db/GameState";
+import { GameState } from "@ttt/lib/GameState";
 import { DatabaseConnectionType, sql } from "slonik";
 
 export const createGame = async (

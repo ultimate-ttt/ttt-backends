@@ -1,6 +1,6 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
 import { createPool } from 'slonik';
-import { connectionString } from '../environment';
+import environment from '../environment';
 import { Status } from '@ttt/lib/Status';
 import { validBody } from './validateRequest';
 import { RequestBody } from './requestBody';
@@ -11,7 +11,7 @@ import {
   getPlayerTwoId,
   updateGameState,
 } from './db';
-import { GameState } from '@ttt/lib/db/GameState';
+import { GameState } from '@ttt/lib/GameState';
 import { initGame, mapRequestMoveToMove } from './mapMove';
 import { Player } from '@ttt/lib/TicTacToeGame';
 
@@ -37,7 +37,7 @@ const badRequest = (message: string) => {
   };
 };
 
-const pool = createPool(connectionString);
+const pool = createPool(environment.connectionString);
 
 const httpTrigger: AzureFunction = async function(
   context: CustomContext,
@@ -91,7 +91,7 @@ const httpTrigger: AzureFunction = async function(
     );
   }
 
-  await pool.connect((con) => createMove(con, move));
+  await pool.connect((con) => createMove(con, move, currentPlayer));
 
   context.res = {};
 };

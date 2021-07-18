@@ -1,10 +1,10 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
 import { createPool } from 'slonik';
-import { connectionString } from '../environment';
 import { Status } from '@ttt/lib/Status';
 import { RequestBody, validBody } from './validateRequest';
 import { getPlayerTwoId, updateGameState } from '../db';
-import { GameState } from '@ttt/lib/db/GameState';
+import { GameState } from '@ttt/lib/GameState';
+import environment from '../environment';
 
 interface CustomContext extends Context {
   res: {
@@ -29,7 +29,7 @@ const badRequest = (message: string) => {
   };
 };
 
-const pool = createPool(connectionString);
+const pool = createPool(environment.connectionString);
 
 const httpTrigger: AzureFunction = async function(
   context: CustomContext,
