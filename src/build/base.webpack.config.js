@@ -19,7 +19,9 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()]
   },
   plugins: [
-    new Dotenv(),
+    new Dotenv({
+      safe: true
+    }),
   ],
   output: {
     filename: '[name]/index.js',
