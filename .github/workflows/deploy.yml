@@ -4,9 +4,6 @@ on:
   push:
 # TODO: master
 
-env:
-  AZURE_WEBAPP_NAME: your-app-name    # set this to your application's name
-
 jobs:
   build-and-deploy:
     name: Build and Deploy
@@ -43,8 +40,8 @@ jobs:
           mv src/dist ../../dist
         working-directory: src/connection
         
-      - name: Azure Functions Action
-        uses: Azure/functions-action@v1.4.0
+      - name: Deploy to Azure 🚀
+        uses: Azure/functions-action@v1.3.2
         with:
           app-name: ${{ secrets.FUN_CONNECTION_NAME }}
           publish-profile: ${{ secrets.FUN_CONNECTION_PROFILE }}
