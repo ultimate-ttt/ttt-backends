@@ -33,7 +33,7 @@ jobs:
         run: |
           cd src/connection
           dotenv set DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
-          dotenv-linter compare .env .env.example
+          dotenv-linter .env .env.example
         env:
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
 
