@@ -31,6 +31,7 @@ jobs:
       - name: Setup .env ✉️
         run: |
           cd src/connection
+          touch .env
           dotenv set DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
           dotenv-linter compare .env .env.example
         env:
