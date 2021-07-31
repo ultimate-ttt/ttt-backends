@@ -1,4 +1,4 @@
-const connectionString = process.env.DatabaseConnectionString;
+const connectionString = process.env.DB_CONNECTION_STRING;
 const environment = {
   connectionString
 }
