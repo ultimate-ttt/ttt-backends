@@ -26,8 +26,8 @@ jobs:
       - name: Install dependencies 🔌
         run: |
           yarn install --immutable
-          curl -sSfL https://raw.githubusercontent.com/dotenv-linter/dotenv-linter/master/install.sh | sh -s
           pip install python-dotenv
+          pip install dotenv-linter
 
       - name: Setup .env ✉️
         run: |
