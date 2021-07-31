@@ -34,9 +34,13 @@ jobs:
         env:
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
 
+# todo do this in webpack
       - name: Build functions 🏗
         run: |
           yarn build
+          cp connect/function.json dist/connect/function.json
+          cp create/function.json dist/create/function.json
+          cp host.json dist/host.json
           mv src/dist ../../dist
         working-directory: src/connection
         
