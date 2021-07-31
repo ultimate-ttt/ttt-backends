@@ -40,7 +40,6 @@ jobs:
       - name: Build functions 🏗
         run: |
           yarn build
-        # make it easier to pick up dist folder
           mv src/dist ../../dist
         working-directory: src/connection
         
