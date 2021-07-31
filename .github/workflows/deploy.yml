@@ -24,13 +24,19 @@ jobs:
           node-version: 14.x
 
       - name: Install dependencies 🔌
-        run: yarn install --immutable
+        run: |
+          yarn install --immutable
+          curl -sSfL https://raw.githubusercontent.com/dotenv-linter/dotenv-linter/master/install.sh | sh -s
 
-      - name: Build functions 🏗
+      - name: Setup .env 📦
         run: |
           cd src/connection
-          dotenv set DB_CONNECTION_STRING ${DB_CONNECTION_STRING} 
-          yarn build
+          touch .env
+          dotenv set DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
+          dotenv-linter compare .env .env.example
+
+      - name: Build functions 🏗
+        run: yarn build # TODO: do I need to cd again?
         env:
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
 
