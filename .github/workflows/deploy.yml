@@ -31,13 +31,14 @@ jobs:
 
       - name: Setup .env ✉️
         run: |
-          cd src/connection
           dotenv -q never set DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
           dotenv-linter .env .env.example
+        working-directory: src/connection
         env:
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
 
       - name: Build functions 🏗
-        run: yarn build # TODO: do I need to cd again?
+        run: yarn build
+        working-directory: src/connection
 
   # deployment stuff
