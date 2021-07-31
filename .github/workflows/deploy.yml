@@ -41,7 +41,7 @@ jobs:
         working-directory: src/connection
         
       - name: Deploy to Azure 🚀
-        uses: Azure/functions-action@v1.3.2
+        uses: Azure/functions-action@v1.3.1
         with:
           app-name: ${{ secrets.FUN_CONNECTION_NAME }}
           publish-profile: ${{ secrets.FUN_CONNECTION_PROFILE }}
