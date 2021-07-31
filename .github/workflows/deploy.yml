@@ -27,11 +27,11 @@ jobs:
         run: |
           yarn install --immutable
           curl -sSfL https://raw.githubusercontent.com/dotenv-linter/dotenv-linter/master/install.sh | sh -s
+          pip install python-dotenv
 
       - name: Setup .env ✉️
         run: |
           cd src/connection
-          touch .env
           dotenv set DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
           dotenv-linter compare .env .env.example
         env:
