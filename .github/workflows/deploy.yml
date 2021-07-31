@@ -5,8 +5,8 @@ on:
 # TODO: master
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  deploy:
+    name: Deploy Function
     runs-on: ubuntu-latest
     environment: staging
     steps:
