@@ -28,16 +28,15 @@ jobs:
           yarn install --immutable
           curl -sSfL https://raw.githubusercontent.com/dotenv-linter/dotenv-linter/master/install.sh | sh -s
 
-      - name: Setup .env 📦
+      - name: Setup .env ✉️
         run: |
           cd src/connection
-          touch .env
           dotenv set DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
           dotenv-linter compare .env .env.example
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
 
       - name: Build functions 🏗
         run: yarn build # TODO: do I need to cd again?
-        env:
-          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
 
   # deployment stuff
