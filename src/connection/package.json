@@ -5,7 +5,7 @@
     "build": "webpack --mode=production",
     "watch": "webpack --mode=development --watch",
     "prestart": "webpack --mode=development",
-    "start:host": "func start --script-root src --typescript",
+    "start:host": "func start --script-root src/dist --typescript",
     "start": "yarn prestart && run-p start:host watch",
     "test": "echo \"No tests yet...\"",
     "generate": "slonik-typegen generate"
