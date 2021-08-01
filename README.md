@@ -23,6 +23,6 @@ This is a mono-repository containing all backends for the Ultimate TTT frontend.
 # Roadmap
 - [x] Create functions
 - [ ] Integrate with frontend (separate route)
-- [ ] Create CI scripts
+- [x] Create CI scripts
 - [ ] Combine online/offline in frontend
 - [ ] Combine backend and frontend repo
