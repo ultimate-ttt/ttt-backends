@@ -34,7 +34,8 @@ jobs:
         env:
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
 
-# todo do this in webpack
+# todo do copying in webpack
+# todo should also fix issue with function.json path being wrong
       - name: Build functions 🏗
         run: |
           yarn build
