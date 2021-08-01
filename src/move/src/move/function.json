@@ -15,5 +15,5 @@
       "name": "res"
     }
   ],
-  "scriptFile": "../dist/connect/index.js"
+  "scriptFile": "./index.js"
 }

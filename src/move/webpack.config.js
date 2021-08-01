@@ -3,6 +3,6 @@ const baseConfig = require('@ttt/build/base.webpack.config');
 
 module.exports = merge(baseConfig, {
   entry: {
-    'connect': './src/move/index.ts'
+    'move': './src/move/index.ts'
   }
 });
