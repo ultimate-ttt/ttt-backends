@@ -9,6 +9,12 @@ jobs:
     name: Deploy Function
     runs-on: ubuntu-latest
     environment: staging
+    strategy:
+      matrix:
+        include:
+          - node-version: 10.x
+            site: "${{ secrets.DB_CONNECTION_STRING }}"
+            datacenter: "site-a"
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
@@ -28,10 +34,12 @@ jobs:
 
       - name: Setup .env ✉️
         run: |
+          echo ${X}
           dotenv -q never set DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
           dotenv-linter .env .env.example
         working-directory: src/connection
         env:
+          X: ${{ matrix.site }}
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
 
       - name: Build functions 🏗
