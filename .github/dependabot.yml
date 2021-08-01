@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # TODO: add dependency updates when dependabot supports yarn v2
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "panmau"
+    assignees:
+      - "panmau"
+    labels:
+      - "Type: Maintenance"
