@@ -2,7 +2,8 @@ name: Deploy Staging
 
 on:
   push:
-# TODO: master
+    branches:
+      - main
 
 # Sadly I needed to copy paste the deploy job for several reasons:
 # - strategy.matrix doesn't allow for the usage of secrets
