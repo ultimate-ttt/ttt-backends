@@ -1,0 +1,98 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - main
+
+# Sadly I needed to copy paste the deploy job for several reasons:
+# - strategy.matrix doesn't allow for the usage of secrets
+# - uploading of artifacts would include the sensitive db information
+# - workflow templates are not implemented yet. But are on the Roadmap https://github.com/github/roadmap/issues/98
+#   -> when these are implemented I can change it!
+jobs:
+  deploy-move:
+    name: Deploy Move Function
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Use Node.js 14.x 🧳
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: Install dependencies 🔌
+        run: |
+          yarn install --immutable
+          pip install python-dotenv
+          pip install dotenv-linter
+
+      - name: Setup .env ✉️
+        run: |
+          dotenv -q never set DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
+          dotenv-linter .env .env.example
+        working-directory: src/move
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+
+      - name: Build functions 🏗
+        run: | 
+          yarn build
+          mv src/dist ../../dist
+        working-directory: src/move
+        
+      - name: Deploy to Azure 🚀
+        uses: Azure/functions-action@v1.3.1
+        with:
+          app-name: ${{ secrets.FUN_MOVE_NAME }}
+          publish-profile: ${{ secrets.FUN_MOVE_PROFILE }}
+          package: dist
+
+  deploy-connection:
+    name: Deploy Connection Function
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Use Node.js 14.x 🧳
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: Install dependencies 🔌
+        run: |
+          yarn install --immutable
+          pip install python-dotenv
+          pip install dotenv-linter
+
+      - name: Setup .env ✉️
+        run: |
+          dotenv -q never set DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
+          dotenv-linter .env .env.example
+        working-directory: src/connection
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+
+      - name: Build functions 🏗
+        run: |
+          yarn build
+          mv src/dist ../../dist
+        working-directory: src/connection
+
+      - name: Deploy to Azure 🚀
+        uses: Azure/functions-action@v1.3.1
+        with:
+          app-name: ${{ secrets.FUN_CONNECTION_NAME }}
+          publish-profile: ${{ secrets.FUN_CONNECTION_PROFILE }}
+          package: dist

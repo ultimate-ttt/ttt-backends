@@ -2,6 +2,7 @@
   "name": "@ttt/build",
   "private": true,
   "devDependencies": {
+    "copy-webpack-plugin": "^9.0.1",
     "dotenv-webpack": "^7.0.3",
     "ts-loader": "^9.2.3",
     "tsconfig-paths-webpack-plugin": "^3.5.1",

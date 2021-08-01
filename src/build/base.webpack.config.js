@@ -3,6 +3,7 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   target: 'node', // IMPORTANT!
@@ -19,7 +20,26 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()]
   },
   plugins: [
-    new Dotenv(),
+    new Dotenv({
+      safe: true
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          // Copy function.json and host.json to dist
+          from: "src/**/*.json",
+          to({ context, absoluteFilename }) {
+            const pathParts = absoluteFilename.split('/src/');
+            const lastPart = pathParts[pathParts.length - 1];
+            return Promise.resolve(lastPart);
+          },
+          globOptions: {
+            // Don't ignore local.settings.json as it's only created locally and used for the ports
+            ignore: ["**/dist/**", "**/*.settings.example.json"],
+          },
+        },
+      ],
+    }),
   ],
   output: {
     filename: '[name]/index.js',
